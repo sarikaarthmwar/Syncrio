@@ -48,7 +48,9 @@ export function AboutFounder() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/syncrio"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-secondary to-accent px-6 py-3 font-semibold text-white shadow-lg shadow-accent/25 transition-transform hover:scale-[1.03]"
             >
               <Link2 size={17} /> Connect on LinkedIn

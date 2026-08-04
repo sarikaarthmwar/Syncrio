@@ -1,4 +1,9 @@
-import { Link2, Code2, Mail } from "lucide-react";
+import { Link2, Mail } from "lucide-react";
+
+const socialLinks = [
+  { Icon: Link2, href: "https://www.linkedin.com/company/syncrio", label: "LinkedIn" },
+  { Icon: Mail, href: "mailto:info@syncrio.tech", label: "Email" },
+];
 
 const columns = [
   { title: "Company", links: ["About", "Careers", "Insights", "Contact"] },
@@ -22,10 +27,13 @@ export function Footer() {
             and more predictably.
           </p>
           <div className="mt-5 flex gap-3">
-            {[Link2, Code2, Mail].map((Icon, i) => (
+            {socialLinks.map(({ Icon, href, label }) => (
               <a
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                aria-label={label}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-white/30 hover:text-white"
               >
                 <Icon size={16} />
