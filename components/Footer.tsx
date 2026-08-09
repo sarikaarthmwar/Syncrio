@@ -6,9 +6,33 @@ const socialLinks = [
 ];
 
 const columns = [
-  { title: "Company", links: ["About", "Careers", "Insights", "Contact"] },
-  { title: "Platform", links: ["Products", "Solutions", "Services", "Industries"] },
-  { title: "Ecosystem", links: ["Syncrio Consulting", "Syncrio Labs", "Syncrio Academy", "Syncrio Community"] },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Insights", href: "/blog" },
+      { label: "Contact", href: "#contact" },
+    ],
+  },
+  {
+    title: "Platform",
+    links: [
+      { label: "Products", href: "#products" },
+      { label: "Solutions", href: "#solutions" },
+      { label: "Services", href: "#services" },
+      { label: "Industries", href: "#industries" },
+    ],
+  },
+  {
+    title: "Ecosystem",
+    links: [
+      { label: "Syncrio Consulting", href: "#" },
+      { label: "Syncrio Labs", href: "#" },
+      { label: "Syncrio Academy", href: "#" },
+      { label: "Syncrio Community", href: "#" },
+    ],
+  },
 ];
 
 export function Footer() {
@@ -47,9 +71,9 @@ export function Footer() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white">{col.title}</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {col.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-slate-400 transition-colors hover:text-white">
-                    {l}
+                <li key={l.label}>
+                  <a href={l.href} className="text-slate-400 transition-colors hover:text-white">
+                    {l.label}
                   </a>
                 </li>
               ))}
