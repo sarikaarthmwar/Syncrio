@@ -3,15 +3,14 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CareersHero } from "@/components/careers/CareersHero";
 import { EcosystemSection } from "@/components/careers/EcosystemSection";
-import { WhoBelongsSection } from "@/components/careers/WhoBelongsSection";
-import { PathwaySection } from "@/components/careers/PathwaySection";
-import { QuoteSection } from "@/components/careers/QuoteSection";
-import { TalentForm } from "@/components/careers/TalentForm";
+import { JourneySection } from "@/components/careers/JourneySection";
+import { LearningHubSection } from "@/components/careers/LearningHubSection";
+import { JoinSection } from "@/components/careers/JoinSection";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const TITLE = "Careers at Syncrio — Join the Talent Ecosystem";
+const TITLE = "Careers at Syncrio — Build Your Career by Building Real Things";
 const DESCRIPTION =
-  "Syncrio is a business, technology, and consulting ecosystem. Join the talent pool across engineering, business, finance, operations, consulting, product, design, and growth.";
+  "Don't wait for your first job to get your first experience. Join the Syncrio talent ecosystem across engineering, business, finance, operations, consulting, product, design, and growth.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -38,10 +37,9 @@ export default function CareersPage() {
       <main className="flex-1">
         <CareersHero />
         <EcosystemSection />
-        <WhoBelongsSection />
-        <PathwaySection />
-        <QuoteSection />
-        <TalentForm />
+        <JourneySection />
+        <LearningHubSection />
+        <JoinSection />
       </main>
       <Footer />
     </>
