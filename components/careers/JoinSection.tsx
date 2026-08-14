@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, Send } from "lucide-react";
 import { Reveal } from "../Reveal";
 
@@ -16,7 +16,23 @@ const labelClass = "text-xs font-semibold text-slate-500";
 export function JoinSection() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
   const iframeLoadedOnce = useRef(false);
+  const disciplineRef = useRef<HTMLSelectElement>(null);
+
+  // Receives the quiz's match and pre-fills the discipline field.
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (disciplineRef.current && detail) {
+        disciplineRef.current.value = detail;
+        setPrefilled(true);
+        setTimeout(() => setPrefilled(false), 2200);
+      }
+    };
+    window.addEventListener("syncrio:discipline-match", handler);
+    return () => window.removeEventListener("syncrio:discipline-match", handler);
+  }, []);
 
   const handleIframeLoad = () => {
     if (!iframeLoadedOnce.current) {
@@ -102,8 +118,17 @@ export function JoinSection() {
                       <input id="tf-education" name="entry.646555379" required placeholder="B.Tech CS, final year" className={inputClass} />
                     </div>
                     <div>
-                      <label htmlFor="tf-discipline" className={labelClass}>Discipline *</label>
-                      <select id="tf-discipline" name="entry.2045259203" required defaultValue="" className={inputClass}>
+                      <label htmlFor="tf-discipline" className={labelClass}>
+                        Discipline * {prefilled && <span className="text-accent">— matched from your quiz</span>}
+                      </label>
+                      <select
+                        id="tf-discipline"
+                        name="entry.2045259203"
+                        ref={disciplineRef}
+                        required
+                        defaultValue=""
+                        className={`${inputClass} transition-shadow ${prefilled ? "ring-2 ring-accent" : ""}`}
+                      >
                         <option value="" disabled>Select one</option>
                         <option>Technology &amp; AI</option>
                         <option>Business &amp; Management</option>

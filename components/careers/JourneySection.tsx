@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { Reveal } from "../Reveal";
 
 const stages = [
@@ -29,17 +31,47 @@ export function JourneySection() {
 
         <div className="relative mt-14">
           <div className="absolute left-0 right-0 top-5 hidden h-px bg-rule lg:block" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            style={{ transformOrigin: "left" }}
+            className="absolute left-0 right-0 top-5 hidden h-px bg-accent lg:block"
+          />
+
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
             {stages.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.06}>
-                <div className="relative">
-                  <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-rule bg-white font-display text-sm font-semibold text-ink">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+              <div key={s.title} className="relative">
+                <motion.div
+                  initial={{ backgroundColor: "#ffffff", color: "#0f172a", borderColor: "#e5e5e0" }}
+                  whileInView={{ backgroundColor: "#7c3aed", color: "#ffffff", borderColor: "#7c3aed" }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.4, delay: i * 0.15 }}
+                  className="relative z-10 grid h-10 w-10 place-items-center rounded-full border font-display text-sm font-semibold"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </motion.div>
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.3, delay: i * 0.15 + 0.35 }}
+                  className="absolute -right-1 -top-1 z-20 grid h-5 w-5 place-items-center rounded-full bg-emerald-500 text-white"
+                >
+                  <Check size={12} strokeWidth={3} />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.4, delay: i * 0.15 + 0.1 }}
+                >
                   <h3 className="mt-4 text-sm font-semibold text-ink">{s.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-slate-500">{s.text}</p>
-                </div>
-              </Reveal>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>

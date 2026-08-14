@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CareersHero } from "@/components/careers/CareersHero";
 import { EcosystemSection } from "@/components/careers/EcosystemSection";
+import { QuizSection } from "@/components/careers/QuizSection";
 import { JourneySection } from "@/components/careers/JourneySection";
 import { LearningHubSection } from "@/components/careers/LearningHubSection";
 import { JoinSection } from "@/components/careers/JoinSection";
@@ -37,6 +38,7 @@ export default function CareersPage() {
       <main className="flex-1">
         <CareersHero />
         <EcosystemSection />
+        <QuizSection />
         <JourneySection />
         <LearningHubSection />
         <JoinSection />

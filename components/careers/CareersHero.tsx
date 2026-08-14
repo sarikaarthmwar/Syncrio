@@ -70,17 +70,17 @@ export function CareersHero() {
         >
           <svg viewBox="0 0 500 280" className="w-full" role="img" aria-label="Diagram showing the Syncrio journey: Explore, Build, Deliver, and Grow, connected around a central Syncrio node.">
             {journeyNodes.map((n, i) => (
-              <line key={i} x1="250" y1="150" x2={n.x} y2={n.y} stroke="var(--rule)" strokeWidth="1.5" />
+              <line key={i} x1="250" y1="150" x2={n.x} y2={n.y} stroke="#e5e5e0" strokeWidth="1.5" />
             ))}
-            <rect x="180" y="118" width="140" height="64" rx="10" fill="var(--ink)" />
-            <text x="250" y="156" textAnchor="middle" fontSize="15" fontWeight="700" fill="white" letterSpacing="0.02em">
+            <rect x="180" y="118" width="140" height="64" rx="10" fill="#0f172a" />
+            <text x="250" y="156" textAnchor="middle" fontSize="15" fontWeight="700" fill="#ffffff" letterSpacing="0.02em">
               SYNCRIO
             </text>
             {journeyNodes.map((n, i) => (
               <g key={i}>
-                <circle cx={n.x} cy={n.y} r="30" fill="var(--surface)" stroke="var(--rule)" strokeWidth="1.5" />
+                <circle cx={n.x} cy={n.y} r="30" fill="#fafaf8" stroke="#e5e5e0" strokeWidth="1.5" />
                 <circle cx={n.x} cy={n.y} r="3" fill="#7c3aed" />
-                <text x={n.x} y={n.y + 5} textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--ink)">
+                <text x={n.x} y={n.y + 5} textAnchor="middle" fontSize="12" fontWeight="600" fill="#0f172a">
                   {n.label}
                 </text>
               </g>
