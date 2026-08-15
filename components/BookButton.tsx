@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { useContactModal } from "./ContactModalProvider";
 
 export function BookButton({
   className,
@@ -10,14 +10,10 @@ export function BookButton({
   className?: string;
   children: ReactNode;
 }) {
-  const router = useRouter();
+  const { openModal } = useContactModal();
 
   return (
-    <button
-      type="button"
-      onClick={() => router.push("/ai-assessment")}
-      className={className}
-    >
+    <button type="button" onClick={openModal} className={className}>
       {children}
     </button>
   );
