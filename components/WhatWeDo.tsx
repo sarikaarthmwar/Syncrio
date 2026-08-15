@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Reveal } from "./Reveal";
 import { BrainCircuit, ClipboardList, Workflow, Building2, Check } from "lucide-react";
 
@@ -7,24 +8,51 @@ const disciplines = [
   {
     icon: BrainCircuit,
     title: "AI Transformation",
-    items: ["AI Strategy", "AI Governance", "Enterprise AI", "AI Agents", "GenAI Adoption", "Copilots"],
+    items: [
+      ["AI Strategy", "ai-strategy"],
+      ["AI Governance", "ai-governance"],
+      ["Enterprise AI", "enterprise-ai"],
+      ["AI Agents", "ai-agents"],
+      ["GenAI Adoption", "genai-adoption"],
+      ["Copilots", "ai-copilots"],
+    ],
   },
   {
     icon: ClipboardList,
     title: "Project & Program Management",
-    items: ["PMO", "Delivery Excellence", "Portfolio Governance", "Agile Transformation", "Risk Management", "Program Leadership"],
+    items: [
+      ["PMO", "pmo"],
+      ["Delivery Excellence", "delivery-excellence"],
+      ["Portfolio Governance", "portfolio-governance"],
+      ["Agile Transformation", "agile-transformation"],
+      ["Risk Management", "risk-management"],
+      ["Program Leadership", "program-leadership"],
+    ],
   },
   {
     icon: Workflow,
     title: "Intelligent Automation",
-    items: ["Workflow Automation", "Testing Automation", "Business Automation", "Document Intelligence", "AI Agents", "Process Automation"],
+    items: [
+      ["Workflow Automation", "workflow-automation"],
+      ["Testing Automation", "testing-automation"],
+      ["Business Automation", "business-automation"],
+      ["Document Intelligence", "document-intelligence"],
+      ["AI Agents", "ai-agents"],
+      ["Process Automation", "process-automation"],
+    ],
   },
   {
     icon: Building2,
     title: "Enterprise Consulting",
-    items: ["Digital Transformation", "Operating Model", "Technology Strategy", "Process Excellence", "Organizational Change"],
+    items: [
+      ["Digital Transformation", "digital-transformation"],
+      ["Operating Model", "operating-model"],
+      ["Technology Strategy", "technology-strategy"],
+      ["Process Excellence", "process-excellence"],
+      ["Organizational Change", "organizational-change"],
+    ],
   },
-];
+] as const;
 
 export function WhatWeDo() {
   return (
@@ -49,10 +77,12 @@ export function WhatWeDo() {
               </div>
               <h3 className="mt-5 text-lg font-semibold text-slate-900">{d.title}</h3>
               <ul className="mt-4 space-y-2.5">
-                {d.items.map((it) => (
-                  <li key={it} className="flex items-center gap-2 text-sm text-slate-600">
-                    <Check size={14} className="shrink-0 text-accent" />
-                    {it}
+                {d.items.map(([label, slug]) => (
+                  <li key={slug}>
+                    <Link href={`/services/${slug}`} className="flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-secondary">
+                      <Check size={14} className="shrink-0 text-accent" />
+                      {label}
+                    </Link>
                   </li>
                 ))}
               </ul>
