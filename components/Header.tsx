@@ -6,7 +6,7 @@ import { BookButton } from "./BookButton";
 
 const links = [
   { href: "#solutions", label: "Solutions" },
-  { href: "#services", label: "Services" },
+  { href: "/services", label: "Services" },
   { href: "#products", label: "Products" },
   { href: "#industries", label: "Industries" },
   { href: "/blog", label: "Blog" },
@@ -32,7 +32,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="#home" className="flex items-center gap-2.5 font-semibold text-lg tracking-tight">
+        <a href="/" className="flex items-center gap-2.5 font-semibold text-lg tracking-tight">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary via-secondary to-accent text-white font-bold shadow-lg shadow-secondary/20">
             S
           </span>
