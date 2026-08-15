@@ -6,13 +6,23 @@ import { ContactModalProvider } from "@/components/ContactModalProvider";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Syncrio — Enterprise AI Solutions for Delivery Transformation",
+    default: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
     template: `%s | ${SITE_NAME}`,
   },
   description: ORG_DESCRIPTION,
-  keywords: ["enterprise AI solutions", "AI for enterprise", "enterprise AI transformation", "AI program management"],
+  keywords: [
+    "enterprise AI",
+    "AI transformation",
+    "AI agents",
+    "AI consulting",
+    "intelligent automation",
+    "SaaS delivery",
+    "enterprise automation",
+    "AI program management",
+    "digital transformation",
+  ],
   openGraph: {
-    title: "Syncrio — Enterprise AI Solutions for Delivery Transformation",
+    title: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
     description: ORG_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -20,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Syncrio — Enterprise AI Solutions for Delivery Transformation",
+    title: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
     description: ORG_DESCRIPTION,
   },
 };
