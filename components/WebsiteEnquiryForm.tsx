@@ -16,23 +16,22 @@ const services = [
 export function WebsiteEnquiryForm() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
-  const iframeLoadedOnce = useRef(false);
+  const [confirmationPending, setConfirmationPending] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   function handleIframeLoad() {
-    if (!iframeLoadedOnce.current) {
-      iframeLoadedOnce.current = true;
-      return;
-    }
+    // The iframe starts on about:blank. Only a load that happens after a
+    // real submission attempt is treated as the Google Forms response.
+    if (!confirmationPending) return;
 
+    setConfirmationPending(false);
     setSending(false);
     setSent(true);
   }
 
   function handleSubmit() {
     setSending(true);
-    // Google Forms loads the response into the hidden iframe. The second
-    // iframe load indicates that the submission completed.
-    setTimeout(() => setSending(false), 10000);
+    setConfirmationPending(true);
   }
 
   if (sent) {
@@ -43,7 +42,7 @@ export function WebsiteEnquiryForm() {
         </div>
         <h2 className="mt-5 text-2xl font-bold text-slate-900">Thanks — we received your enquiry</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-600">
-          We&apos;ll review your requirement and get back to you soon.
+          Your requirement has been submitted. We&apos;ll review it and get back to you soon.
         </p>
         <button
           type="button"
@@ -108,8 +107,10 @@ export function WebsiteEnquiryForm() {
       </form>
 
       <iframe
+        ref={iframeRef}
         name="website_enquiry_iframe"
         title="Website enquiry form submission"
+        src="about:blank"
         className="hidden"
         onLoad={handleIframeLoad}
       />
