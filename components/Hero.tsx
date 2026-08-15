@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { BookButton } from "./BookButton";
+import Link from "next/link";
 
 const badges = ["Enterprise AI", "AI Agents", "Intelligent Automation", "SaaS Delivery", "Program Excellence"];
 
@@ -56,10 +56,13 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
-            <BookButton className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary via-secondary to-accent bg-[length:200%_100%] px-7 py-3.5 font-semibold text-white shadow-xl shadow-secondary/20 transition-all hover:bg-[100%_0]">
+            <Link
+              href="/ai-assessment"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary via-secondary to-accent bg-[length:200%_100%] px-7 py-3.5 font-semibold text-white shadow-xl shadow-secondary/20 transition-all hover:bg-[100%_0]"
+            >
               Book Free AI Consultation
               <ArrowRight size={18} className="ml-2 inline transition-transform group-hover:translate-x-1" />
-            </BookButton>
+            </Link>
             <a
               href="/services"
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-3.5 font-semibold text-slate-800 shadow-sm transition-colors hover:border-slate-300"
