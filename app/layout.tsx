@@ -5,34 +5,11 @@ import { ContactModalProvider } from "@/components/ContactModalProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
-    template: `%s | ${SITE_NAME}`,
-  },
-  description: ORG_DESCRIPTION,
-  keywords: [
-    "enterprise AI",
-    "AI transformation",
-    "AI agents",
-    "AI consulting",
-    "intelligent automation",
-    "SaaS delivery",
-    "enterprise automation",
-    "AI program management",
-    "digital transformation",
-  ],
-  openGraph: {
-    title: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
-    description: ORG_DESCRIPTION,
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Syncrio — AI-Powered Enterprise Delivery & Transformation",
-    description: ORG_DESCRIPTION,
-  },
+  title: { default: "Syncrio — Custom AI Solutions, Built for Your Business", template: `%s | ${SITE_NAME}` },
+  description: "Syncrio designs and builds custom AI applications, agents and intelligent workflows around your business processes, data and systems.",
+  keywords: ["custom AI development", "AI solution engineering", "AI agents", "AI applications", "enterprise AI", "AI automation", "RAG", "AI workflow automation", "custom AI solutions"],
+  openGraph: { title: "Syncrio — Custom AI Solutions, Built for Your Business", description: "Custom AI applications, agents and intelligent workflows built around your business.", url: SITE_URL, siteName: SITE_NAME, type: "website" },
+  twitter: { card: "summary_large_image", title: "Syncrio — Custom AI Solutions, Built for Your Business", description: "Custom AI applications, agents and intelligent workflows built around your business." },
 };
 
 const orgLd = {
@@ -41,13 +18,10 @@ const orgLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: ORG_DESCRIPTION,
+  knowsAbout: ["Custom AI development", "AI agents", "Intelligent automation", "Enterprise AI", "AI solution engineering"],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <body className="min-h-full flex flex-col bg-white text-slate-900">
