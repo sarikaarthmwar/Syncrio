@@ -114,12 +114,7 @@ export default function SurveyPage() {
           <div className="flex gap-1.5">{[1,2,3,4].map((item) => <span key={item} className={`h-1.5 w-10 rounded-full ${item <= step ? "bg-blue-600" : "bg-slate-200"}`} />)}</div>
         </div>
 
-        <form action="https://formsubmit.co/info@syncrio.tech" method="POST" className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
-          <input type="hidden" name="_subject" value="GCC Talent Demand Study — New Response" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_next" value="https://syncrio.tech/survey/thanks" />
-          <input type="hidden" name="_url" value="https://syncrio.tech/survey" />
-          <input type="hidden" name="_honey" value="" />
+        <form onSubmit={submit} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
 
           <div className="p-7 sm:p-10">
             {step === 1 && (
@@ -128,7 +123,7 @@ export default function SurveyPage() {
                 <p className="mt-2 text-slate-600">This helps us understand the perspective behind the response.</p>
                 <div className="mt-8 grid gap-6 sm:grid-cols-2">
                   <Field label="Name" required><input name="name" required value={form.name} onChange={(e) => update("name", e.target.value)} className="input" placeholder="Your name" /></Field>
-                  <Field label="Work email"><input type="email" name="email" value={form.email} onChange={(e) => update("email", e.target.value)} className="input" placeholder="you@company.com" /></Field>
+                  <Field label="Work email (optional)"><input type="email" name="email" value={form.email} onChange={(e) => update("email", e.target.value)} className="input" placeholder="you@company.com" /></Field>
                   <Field label="Your role" required><select name="role" required value={form.role} onChange={(e) => update("role", e.target.value)} className="input"><option value="">Select</option>{["GCC Leadership","HR / Talent Acquisition","Business / Functional Leadership","Technology / Digital / AI","Learning & Development","Consulting / Service Provider","Academia","Other"].map((x)=><option key={x}>{x}</option>)}</select></Field>
                   <Field label="Approximate GCC size" required><select name="gcc_size" required value={form.gccSize} onChange={(e) => update("gccSize", e.target.value)} className="input"><option value="">Select</option>{["<500","500–2,000","2,000–5,000","5,000–10,000","10,000+"].map((x)=><option key={x}>{x}</option>)}</select></Field>
                 </div>
@@ -182,7 +177,7 @@ export default function SurveyPage() {
                   <Field label="What talent capability do you believe GCCs are currently under-preparing for?"><textarea name="underprepared" value={form.underprepared} onChange={(e)=>update("underprepared",e.target.value)} className="input min-h-28 resize-y" placeholder="One capability, role or skill that comes to mind..." /></Field>
                   <Field label="Anything else you would like to add?"><textarea name="comments" value={form.comments} onChange={(e)=>update("comments",e.target.value)} className="input min-h-28 resize-y" placeholder="Your perspective..." /></Field>
                   <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 text-sm leading-6 text-slate-700">
-                    <strong>Want to continue the conversation?</strong> Leave your email above and we may reach out for a short follow-up discussion about the findings.
+                    <strong>Want to continue the conversation?</strong> If you choose to leave your email above, we may reach out for a short follow-up discussion about the findings.
                   </div>
                 </div>
               </div>
