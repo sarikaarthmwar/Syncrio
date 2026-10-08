@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useState } from "react";
 import { ArrowRight, Check, ChevronLeft, ChevronRight, MapPin, Sparkles, Target, Users } from "lucide-react";
 
 const capabilityOptions = [
@@ -64,6 +64,10 @@ export default function SurveyPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   const update = (key: keyof typeof initialForm, value: string | string[]) =>
     setForm((current) => ({ ...current, [key]: value }));
 
@@ -120,11 +124,8 @@ export default function SurveyPage() {
       <header className="relative z-10 border-b border-[#e9dfcf] bg-[#fffaf3]/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#174c3c] text-xl text-white shadow-lg shadow-emerald-900/10">G</span>
-            <span>
-              <span className="block text-xl font-black tracking-tight text-[#174c3c]">GraminGCC</span>
-              <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[#c46b32]">Rural Talent • Global Impact</span>
-            </span>
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#174c3c] text-xs font-black text-white shadow-lg shadow-emerald-900/10">GTD</span>
+            <span className="block text-lg font-black tracking-tight text-[#174c3c] sm:text-xl">GCC Talent Demand Study</span>
           </a>
           <span className="hidden rounded-full border border-[#e7d9c5] bg-white px-4 py-2 text-xs font-bold text-[#657067] sm:block">
             GCC Talent Demand Study 2027
@@ -146,14 +147,14 @@ export default function SurveyPage() {
               We are mapping the real skills GCCs will need next — and asking whether talent from emerging cities can become part of that future.
             </p>
             <p className="mt-4 text-sm font-semibold text-[#c46b32]">
-              Your answers will help shape the GraminGCC talent model.
+              Your answers will help shape a practical GCC talent model.
             </p>
           </div>
 
           <div className="relative overflow-hidden rounded-[2rem] bg-[#174c3c] p-7 text-white shadow-2xl shadow-emerald-950/15">
             <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-orange-400/20" />
             <div className="relative">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">The mission</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">The study</p>
               <p className="mt-3 text-2xl font-bold leading-tight">
                 Demand first.<br />Talent next.
               </p>
@@ -282,7 +283,7 @@ export default function SurveyPage() {
               <StepPanel
                 eyebrow="FINAL ROUND"
                 title="One last thing: what does GCC-ready actually mean?"
-                description="This answer is especially important. It can influence what GraminGCC trains for — and what evidence it asks candidates to prove."
+                description="This answer is especially important. It can influence what future GCC talent programs should build for — and what evidence they should ask candidates to prove."
               >
                 <Question label="What would give you confidence that a candidate is GCC-ready? Pick up to 3.">
                   <div className="grid gap-3 sm:grid-cols-2">
@@ -311,7 +312,7 @@ export default function SurveyPage() {
                 </Field>
 
                 <div className="rounded-2xl bg-[#f5f1e9] p-5 text-sm leading-6 text-[#5c665e]">
-                  <span className="font-bold text-[#174c3c]">You made it.</span> If you left your email, we may invite you to see the findings and continue the conversation around GCC talent creation.
+                  <span className="font-bold text-[#174c3c]">You made it.</span> If you left your email, we may invite you to see the findings and continue the conversation around GCC talent demand and readiness.
                 </div>
               </StepPanel>
             )}
