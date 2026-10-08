@@ -9,7 +9,11 @@ function cleanText(value: unknown, max = 2000) {
 
 function cleanArray(value: unknown, maxItems = 20) {
   return Array.isArray(value)
-    ? value.filter((item): item is string => typeof item === "string").map((item) => item.trim().slice(0, 200)).filter(Boolean).slice(0, maxItems)
+    ? value
+        .filter((item): item is string => typeof item === "string")
+        .map((item) => item.trim().slice(0, 200))
+        .filter(Boolean)
+        .slice(0, maxItems)
     : [];
 }
 
@@ -37,13 +41,20 @@ export async function POST(request: Request) {
       source: "syncrio.tech/survey",
     };
 
-    if (!payload.name || !payload.email || !payload.role || !payload.gcc_size ||
-        payload.capabilities.length === 0 || !payload.hiring_challenge ||
-        !payload.emerging_locations || !payload.training_hiring || !payload.talent_type) {
+    if (
+      !payload.name ||
+      !payload.role ||
+      !payload.gcc_size ||
+      payload.capabilities.length === 0 ||
+      !payload.hiring_challenge ||
+      !payload.emerging_locations ||
+      !payload.training_hiring ||
+      !payload.talent_type
+    ) {
       return NextResponse.json({ error: "Please complete all required questions." }, { status: 400 });
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(payload.email)) {
+    if (payload.email && !/^\S+@\S+\.\S+$/.test(payload.email)) {
       return NextResponse.json({ error: "Please enter a valid work email." }, { status: 400 });
     }
 
@@ -63,39 +74,6 @@ export async function POST(request: Request) {
       const detail = await insertResponse.text();
       console.error("Survey storage failed:", detail);
       return NextResponse.json({ error: "We couldn't save your response. Please try again." }, { status: 502 });
-    }
-
-    // EmailJS is optional until its service/template/public key are configured in Vercel.
-    const emailjsServiceId = process.env.EMAILJS_SERVICE_ID;
-    const emailjsTemplateId = process.env.EMAILJS_TEMPLATE_ID;
-    const emailjsPublicKey = process.env.EMAILJS_PUBLIC_KEY;
-
-    if (emailjsServiceId && emailjsTemplateId && emailjsPublicKey) {
-      const emailResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: emailjsServiceId,
-          template_id: emailjsTemplateId,
-          user_id: emailjsPublicKey,
-          template_params: {
-            name: payload.name,
-            email: payload.email,
-            role: payload.role,
-            gcc_size: payload.gcc_size,
-            capabilities: payload.capabilities.join(", "),
-            hiring_challenge: payload.hiring_challenge,
-            emerging_locations: payload.emerging_locations,
-            location_barriers: payload.location_barriers.join(", "),
-            training_hiring: payload.training_hiring,
-            talent_type: payload.talent_type,
-            readiness_signals: payload.readiness_signals.join(", "),
-            underprepared: payload.underprepared,
-            comments: payload.comments,
-          },
-        }),
-      });
-      if (!emailResponse.ok) console.error("EmailJS notification failed:", await emailResponse.text());
     }
 
     return NextResponse.json({ ok: true });
