@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 const capabilityOptions = [
@@ -61,11 +61,13 @@ const toggle = (items: string[], value: string) =>
 export default function SurveyPage() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState(initialForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const update = (key: keyof typeof initialForm, value: string | string[]) =>
     setForm((current) => ({ ...current, [key]: value }));
 
-  const canContinue =
+  const submit = async (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    setSubmitting(true);\n    setSubmitError("");\n    try {\n      const response = await fetch("/api/survey", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify(form),\n      });\n      const result = await response.json();\n      if (!response.ok) throw new Error(result?.error || "Unable to submit your response.");\n      window.location.href = "/survey/thanks";\n    } catch (error) {\n      setSubmitError(error instanceof Error ? error.message : "Unable to submit your response. Please try again.");\n    } finally {\n      setSubmitting(false);\n    }\n  };\n\n  const canContinue =
     step === 1
       ? Boolean(form.name && form.role && form.gccSize)
       : step === 2
@@ -192,12 +194,12 @@ export default function SurveyPage() {
             {step < 4 ? (
               <button type="button" disabled={!canContinue} onClick={() => setStep((s) => s + 1)} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-40">Continue<ChevronRight size={17}/></button>
             ) : (
-              <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">Submit my perspective<ArrowRight size={17}/></button>
+              <button type="submit" disabled={submitting} className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60">{submitting ? "Submitting…" : "Submit my perspective"}<ArrowRight size={17}/></button>
             )}
           </div>
         </form>
 
-        <p className="mt-6 text-center text-xs leading-5 text-slate-500">
+        {submitError && <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">{submitError}</p>}\n\n        <p className="mt-6 text-center text-xs leading-5 text-slate-500">
           By submitting, you are sharing your professional perspective for the GCC Talent Demand Study. Please do not include confidential employer information.
         </p>
       </section>
