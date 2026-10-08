@@ -219,7 +219,7 @@ export default function SurveyPage() {
                   <Field label="Approximate GCC size" required>
                     <select required value={form.gccSize} onChange={(e) => update("gccSize", e.target.value)} className="gg-input">
                       <option value="">Choose one</option>
-                      ["<500","500–2,000","2,000–5,000","5,000–10,000","10,000+"].map((x) => <option key={x}>{x}</option>)}
+                      {["<500","500–2,000","2,000–5,000","5,000–10,000","10,000+"].map((x) => <option key={x}>{x}</option>)}
                     </select>
                   </Field>
                 </div>
@@ -258,7 +258,7 @@ export default function SurveyPage() {
               >
                 <Question label="How important will talent from Tier-2 / Tier-3 cities be to your GCC talent strategy?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    ["Critical","Important","Somewhat important","Not currently a priority"].map((x) => (
+                    {["Critical","Important","Somewhat important","Not currently a priority"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.emergingLocations === x} onChange={() => update("emergingLocations", x)} />
                     ))}
                   </div>
@@ -272,14 +272,14 @@ export default function SurveyPage() {
                 </Question>
                 <Question label="Would you consider candidates who completed a role-specific, industry-designed training program?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    ["Definitely","Potentially, if independently assessed","Only for entry-level roles","Unlikely"].map((x) => (
+                    {["Definitely","Potentially, if independently assessed","Only for entry-level roles","Unlikely"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.trainingHiring === x} onChange={() => update("trainingHiring", x)} />
                     ))}
                   </div>
                 </Question>
                 <Question label="What type of talent would interest you most?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    ["Entry-level talent","Experienced professionals","AI-ready talent","Functional specialists","Project-based talent","Interns / apprentices","Return-to-work talent","Other"].map((x) => (
+                    {["Entry-level talent","Experienced professionals","AI-ready talent","Functional specialists","Project-based talent","Interns / apprentices","Return-to-work talent","Other"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.talentType === x} onChange={() => update("talentType", x)} />
                     ))}
                   </div>
