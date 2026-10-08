@@ -67,7 +67,25 @@ export default function SurveyPage() {
   const update = (key: keyof typeof initialForm, value: string | string[]) =>
     setForm((current) => ({ ...current, [key]: value }));
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    setSubmitting(true);\n    setSubmitError("");\n    try {\n      const response = await fetch("/api/survey", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify(form),\n      });\n      const result = await response.json();\n      if (!response.ok) throw new Error(result?.error || "Unable to submit your response.");\n      window.location.href = "/survey/thanks";\n    } catch (error) {\n      setSubmitError(error instanceof Error ? error.message : "Unable to submit your response. Please try again.");\n    } finally {\n      setSubmitting(false);\n    }\n  };\n\n  const canContinue =
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const response = await fetch("/api/survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.error || "Unable to submit your response.");
+      window.location.href = "/survey/thanks";
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit your response. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };\n\n  const canContinue =
     step === 1
       ? Boolean(form.name && form.role && form.gccSize)
       : step === 2
