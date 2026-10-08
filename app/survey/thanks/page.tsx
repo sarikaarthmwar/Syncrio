@@ -11,8 +11,8 @@ export default function SurveyThanks() {
           Your response will help us understand where GCC talent demand is heading and what “GCC-ready” should really mean.
         </p>
         <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-          <a href="/" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3.5 font-semibold text-white hover:bg-blue-600">Back to Syncrio <ArrowRight size={17}/></a>
-          <a href="https://www.linkedin.com" className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3.5 font-semibold text-slate-700 hover:bg-slate-50">Follow the study</a>
+          <a href="/" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3.5 font-semibold text-white hover:bg-blue-600">Back to the study <ArrowRight size={17}/></a>
+          <a href="/survey" className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3.5 font-semibold text-slate-700 hover:bg-slate-50">Follow the study</a>
         </div>
       </section>
     </main>
