@@ -65,7 +65,15 @@ export default function SurveyPage() {
   const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const frame = window.requestAnimationFrame(() => {
+      const questionStart = document.querySelector("[data-survey-question-start]");
+      if (questionStart instanceof HTMLElement) {
+        const top = questionStart.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [step]);
 
   const update = (key: keyof typeof initialForm, value: string | string[]) =>
@@ -188,7 +196,7 @@ export default function SurveyPage() {
         </div>
 
         <form onSubmit={submit} className="overflow-hidden rounded-[2rem] border border-[#e8dece] bg-white shadow-[0_24px_70px_rgba(73,58,37,.10)]">
-          <div className="p-6 sm:p-10 lg:p-12">
+          <div data-survey-question-start className="p-6 sm:p-10 lg:p-12">
             {step === 1 && (
               <StepPanel
                 eyebrow="ROUND 01"
@@ -211,7 +219,7 @@ export default function SurveyPage() {
                   <Field label="Approximate GCC size" required>
                     <select required value={form.gccSize} onChange={(e) => update("gccSize", e.target.value)} className="gg-input">
                       <option value="">Choose one</option>
-                      {["<500","500–2,000","2,000–5,000","5,000–10,000","10,000+"].map((x) => <option key={x}>{x}</option>)}
+                      ["<500","500–2,000","2,000–5,000","5,000–10,000","10,000+"].map((x) => <option key={x}>{x}</option>)}
                     </select>
                   </Field>
                 </div>
@@ -250,7 +258,7 @@ export default function SurveyPage() {
               >
                 <Question label="How important will talent from Tier-2 / Tier-3 cities be to your GCC talent strategy?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {["Critical","Important","Somewhat important","Not currently a priority"].map((x) => (
+                    ["Critical","Important","Somewhat important","Not currently a priority"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.emergingLocations === x} onChange={() => update("emergingLocations", x)} />
                     ))}
                   </div>
@@ -264,14 +272,14 @@ export default function SurveyPage() {
                 </Question>
                 <Question label="Would you consider candidates who completed a role-specific, industry-designed training program?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {["Definitely","Potentially, if independently assessed","Only for entry-level roles","Unlikely"].map((x) => (
+                    ["Definitely","Potentially, if independently assessed","Only for entry-level roles","Unlikely"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.trainingHiring === x} onChange={() => update("trainingHiring", x)} />
                     ))}
                   </div>
                 </Question>
                 <Question label="What type of talent would interest you most?" required>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {["Entry-level talent","Experienced professionals","AI-ready talent","Functional specialists","Project-based talent","Interns / apprentices","Return-to-work talent","Other"].map((x) => (
+                    ["Entry-level talent","Experienced professionals","AI-ready talent","Functional specialists","Project-based talent","Interns / apprentices","Return-to-work talent","Other"].map((x) => (
                       <Choice key={x} radio label={x} checked={form.talentType === x} onChange={() => update("talentType", x)} />
                     ))}
                   </div>
@@ -325,7 +333,7 @@ export default function SurveyPage() {
 
             {step < 4 ? (
               <button type="button" disabled={!canContinue} onClick={() => setStep((s) => s + 1)} className="inline-flex items-center gap-2 rounded-full bg-[#174c3c] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/10 transition hover:-translate-y-0.5 hover:bg-[#0f3d2f] disabled:cursor-not-allowed disabled:opacity-35">
-                I&apos;m ready <ChevronRight size={17} />
+                I'm ready <ChevronRight size={17} />
               </button>
             ) : (
               <button type="submit" disabled={submitting} className="inline-flex items-center gap-2 rounded-full bg-[#c46b32] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-900/15 transition hover:-translate-y-0.5 hover:bg-[#ad5925] disabled:cursor-not-allowed disabled:opacity-60">
