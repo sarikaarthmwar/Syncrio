@@ -35,6 +35,9 @@ export async function POST(request: Request) {
       location_barriers: cleanArray(body.locationBarriers),
       training_hiring: cleanText(body.trainingHiring, 120),
       talent_type: cleanText(body.talentType, 120),
+      international_hiring: cleanText(body.internationalHiring, 160),
+      international_capabilities: cleanArray(body.internationalCapabilities, 20),
+      talent_exchange: cleanText(body.talentExchange, 160),
       readiness_signals: cleanArray(body.readinessSignals, 10),
       underprepared: cleanText(body.underprepared, 2000),
       comments: cleanText(body.comments, 3000),
@@ -49,7 +52,9 @@ export async function POST(request: Request) {
       !payload.hiring_challenge ||
       !payload.emerging_locations ||
       !payload.training_hiring ||
-      !payload.talent_type
+      !payload.talent_type ||
+      !payload.international_hiring ||
+      !payload.talent_exchange
     ) {
       return NextResponse.json({ error: "Please complete all required questions." }, { status: 400 });
     }
