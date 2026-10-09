@@ -50,6 +50,9 @@ const initialForm = {
   locationBarriers: [] as string[],
   trainingHiring: "",
   talentType: "",
+  internationalHiring: "",
+  internationalCapabilities: [] as string[],
+  talentExchange: "",
   readinessSignals: [] as string[],
   underprepared: "",
   comments: "",
@@ -86,7 +89,9 @@ export default function SurveyPage() {
         ? form.capabilities.length > 0 && Boolean(form.hiringChallenge)
         : step === 3
           ? Boolean(form.emergingLocations && form.trainingHiring && form.talentType)
-          : true;
+          : step === 4
+            ? Boolean(form.internationalHiring && form.talentExchange)
+            : true;
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -117,6 +122,7 @@ export default function SurveyPage() {
     { title: "Start with you", icon: Users, color: "from-orange-500 to-amber-400" },
     { title: "Spot the demand", icon: Target, color: "from-emerald-500 to-teal-400" },
     { title: "Think beyond hubs", icon: MapPin, color: "from-sky-500 to-blue-500" },
+    { title: "Think globally", icon: Users, color: "from-cyan-500 to-blue-500" },
     { title: "Define GCC-ready", icon: Sparkles, color: "from-violet-500 to-fuchsia-500" },
   ][step - 1];
 
@@ -181,17 +187,17 @@ export default function SurveyPage() {
               <StepIcon size={19} />
             </span>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8a948c]">Round {step} of 4</p>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8a948c]">Round {step} of 5</p>
               <p className="font-bold text-[#174c3c]">{stepCopy.title}</p>
             </div>
           </div>
-          <span className="text-sm font-bold text-[#c46b32]">{step * 25}% complete</span>
+          <span className="text-sm font-bold text-[#c46b32]">{step * 20}% complete</span>
         </div>
 
         <div className="mb-7 h-2 overflow-hidden rounded-full bg-[#eadfce]">
           <div
             className="h-full rounded-full bg-gradient-to-r from-[#c46b32] via-[#e99a45] to-[#174c3c] transition-all duration-500"
-            style={{ width: `${step * 25}%` }}
+            style={{ width: `${step * 20}%` }}
           />
         </div>
 
@@ -289,6 +295,36 @@ export default function SurveyPage() {
 
             {step === 4 && (
               <StepPanel
+                eyebrow="ROUND 04"
+                title="Could India become a destination for global talent?"
+                description="We want to understand whether GCCs would bring international expertise to India—and whether a talent-exchange model could grow local capability at the same time."
+              >
+                <Question label="Would your GCC consider hiring experienced US citizens or other international specialists to work in India?" required>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {["Definitely","Potentially, for niche skills or leadership roles","Only for short-term / project-based assignments","Unlikely","Not sure"].map((x) => (
+                      <Choice key={x} radio label={x} checked={form.internationalHiring === x} onChange={() => update("internationalHiring", x)} />
+                    ))}
+                  </div>
+                </Question>
+                <Question label="Which capabilities could justify bringing international specialists to India? Select all that apply.">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {["AI / GenAI strategy and leadership","Product strategy / engineering","Cybersecurity","Deep domain expertise (e.g., procurement, finance, enterprise systems)","Global market / customer expertise","R&D / innovation","Executive or people leadership","Mentoring and knowledge transfer"].map((x) => (
+                      <Choice key={x} label={x} checked={form.internationalCapabilities.includes(x)} onChange={() => update("internationalCapabilities", toggle(form.internationalCapabilities, x))} />
+                    ))}
+                  </div>
+                </Question>
+                <Question label="Would your organization consider a structured talent-exchange model that brings international specialists to India while developing Indian talent through mentoring and knowledge transfer?" required>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {["Yes, interested in exploring it","Potentially, if outcomes are measurable","Open to a small pilot","Unlikely","Need more information"].map((x) => (
+                      <Choice key={x} radio label={x} checked={form.talentExchange === x} onChange={() => update("talentExchange", x)} />
+                    ))}
+                  </div>
+                </Question>
+              </StepPanel>
+            )}
+
+            {step === 5 && (
+              <StepPanel
                 eyebrow="FINAL ROUND"
                 title="One last thing: what does GCC-ready actually mean?"
                 description="This answer is especially important. It can influence what future GCC talent programs should build for — and what evidence they should ask candidates to prove."
@@ -331,7 +367,7 @@ export default function SurveyPage() {
               <ChevronLeft size={17} /> Back
             </button>
 
-            {step < 4 ? (
+            {step < 5 ? (
               <button type="button" disabled={!canContinue} onClick={() => setStep((s) => s + 1)} className="inline-flex items-center gap-2 rounded-full bg-[#174c3c] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/10 transition hover:-translate-y-0.5 hover:bg-[#0f3d2f] disabled:cursor-not-allowed disabled:opacity-35">
                 I'm ready <ChevronRight size={17} />
               </button>
