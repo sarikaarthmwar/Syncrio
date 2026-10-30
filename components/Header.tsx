@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -24,10 +25,9 @@ export function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-slate-200/70 bg-white/90 shadow-sm backdrop-blur-xl" : "bg-white"}`}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="/" className="flex items-center gap-2.5 font-semibold tracking-tight text-slate-950">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 text-sm font-bold text-white shadow-lg shadow-blue-500/20">S</span>
-          <span className="text-lg">Syncrio</span>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
+        <a href="/" aria-label="Syncrio home" className="flex items-center">
+          <Image src="/syncrio-logo.svg" alt="Syncrio" width={156} height={38} priority className="h-9 w-auto object-contain" />
         </a>
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex">
           {links.map((link) => <a key={link.href} href={link.href} className="transition-colors hover:text-slate-950">{link.label}</a>)}
