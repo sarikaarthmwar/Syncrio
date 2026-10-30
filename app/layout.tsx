@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   title: { default: "Syncrio — Custom AI Solutions, Built for Your Business", template: `%s | ${SITE_NAME}` },
   description: "Syncrio designs and builds custom AI applications, agents and intelligent workflows around your business processes, data and systems.",
   keywords: ["custom AI development", "AI solution engineering", "AI agents", "AI applications", "enterprise AI", "AI automation", "RAG", "AI workflow automation", "custom AI solutions"],
-  openGraph: { title: "Syncrio — Custom AI Solutions, Built for Your Business", description: "Custom AI applications, agents and intelligent workflows built around your business.", url: SITE_URL, siteName: SITE_NAME, type: "website" },
+  icons: { icon: "/syncrio-mark.svg", shortcut: "/syncrio-mark.svg" },
+  openGraph: { title: "Syncrio — Custom AI Solutions, Built for Your Business", description: "Custom AI applications, agents and intelligent workflows built around your business.", url: SITE_URL, siteName: SITE_NAME, type: "website", images: [{ url: "/syncrio-logo.svg", alt: "Syncrio" }] },
   twitter: { card: "summary_large_image", title: "Syncrio — Custom AI Solutions, Built for Your Business", description: "Custom AI applications, agents and intelligent workflows built around your business." },
 };
 
@@ -17,6 +18,7 @@ const orgLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
+  logo: `${SITE_URL}/syncrio-logo.svg`,
   description: ORG_DESCRIPTION,
   knowsAbout: ["Custom AI development", "AI agents", "Intelligent automation", "Enterprise AI", "AI solution engineering"],
 };
