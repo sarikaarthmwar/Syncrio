@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "#what-we-build", label: "Solutions" },
+  { href: "#code-compass", label: "Products" },
   { href: "#how-we-build", label: "How We Build" },
   { href: "/ai-assessment", label: "AI Blueprint" },
   { href: "/blog", label: "Insights" },
