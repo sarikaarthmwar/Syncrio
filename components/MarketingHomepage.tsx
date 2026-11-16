@@ -63,6 +63,38 @@ export function MarketingHomepage() {
 
       <section className="bg-white py-24 lg:py-28"><div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">What this can look like</p><h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Real business problems. Practical AI solutions.</h2></div><div className="mt-14 grid gap-6 lg:grid-cols-3">{examples.map((example) => <article key={example.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-7"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{example.eyebrow}</p><h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-950">{example.title}</h3><p className="mt-4 leading-7 text-slate-600">{example.text}</p><div className="mt-7 flex flex-wrap gap-2">{example.tags.map((tag) => <span key={tag} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600">{tag}</span>)}</div></article>)}</div></div></section>
 
+
+      <section id="code-compass" className="bg-[#07111f] py-24 text-white lg:py-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">Syncrio product 01</p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">Meet Code Compass.</h2>
+            <p className="mt-6 text-xl leading-8 text-slate-200">AI-powered drawing and compliance document review, guided by the building codes of the selected region.</p>
+            <p className="mt-4 leading-7 text-slate-400">Construction reviews span multiple disciplines, detailed drawings and layers of regulatory requirements. Code Compass brings specialist AI agents into one coordinated review workflow — helping teams surface potential gaps, understand risks and organize the next actions.</p>
+            <a href="/enquiry" className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-100">Request a Code Compass demo <ArrowRight size={18} /></a>
+          </div>
+          <div className="rounded-[2rem] border border-white/10 bg-[#0b1728] p-5 shadow-2xl shadow-black/30 sm:p-7">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
+              <div><p className="text-xs uppercase tracking-[0.18em] text-slate-500">Code Compass</p><p className="mt-1 text-lg font-semibold">Coordinated compliance review</p></div>
+              <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-medium text-cyan-200">Multi-agent system</span>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4"><p className="text-xs text-slate-500">01 / INPUT</p><p className="mt-2 font-medium">Drawings & documents</p><p className="mt-1 text-sm leading-6 text-slate-400">Upload plans, specifications and supporting compliance documents.</p></div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4"><p className="text-xs text-slate-500">02 / CONTEXT</p><p className="mt-2 font-medium">Select the region</p><p className="mt-1 text-sm leading-6 text-slate-400">Set the jurisdiction so the review is grounded in relevant code requirements.</p></div>
+            </div>
+            <div className="mt-3 rounded-xl border border-blue-300/20 bg-blue-400/[0.07] p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-blue-200">03 / Specialist agents</p>
+              <div className="mt-3 flex flex-wrap gap-2">{["Compliance", "Architecture", "Structural", "Concrete", "Reinforcement", "Fire & Life Safety", "MEP", "Sustainability", "Construction Safety"].map((agent) => <span key={agent} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs text-slate-200">{agent}</span>)}</div>
+            </div>
+            <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">04 / Consolidated output</p>
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">{[["Compliance score", "Review summary"], ["Category scores", "Discipline view"], ["Findings", "Risk & gaps"], ["Action plan", "Next steps"]].map(([label, sub]) => <div key={label} className="rounded-lg bg-[#07111f] p-3"><p className="text-xs font-medium text-slate-200">{label}</p><p className="mt-1 text-[11px] text-slate-500">{sub}</p></div>)}</div>
+              <p className="mt-3 text-xs text-slate-500">Structured reports with findings, recommendations and supporting review details.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="how-we-build" className="border-t border-slate-200 bg-slate-50 py-24 lg:py-28"><div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">How we build</p><h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Discover. Design. Build. Deploy.</h2><p className="mt-5 text-lg leading-8 text-slate-600">A practical path from an idea or manual process to an AI solution your team can actually use.</p></div><div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 md:grid-cols-2 lg:grid-cols-3">{steps.map(([number, title, text]) => <div key={number} className="bg-white p-7"><span className="text-sm font-semibold text-blue-600">{number}</span><h3 className="mt-8 text-xl font-semibold text-slate-950">{title}</h3><p className="mt-3 leading-7 text-slate-600">{text}</p></div>)}</div></div></section>
 
       <section className="relative overflow-hidden bg-white py-24 lg:py-32"><div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-100/70 blur-3xl" /><div className="relative mx-auto max-w-4xl px-6 text-center lg:px-8"><div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white"><GitBranch size={21} /></div><h2 className="mt-7 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Have an AI idea? Start with the problem.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">Tell us what is slowing your business down. We’ll help translate the problem into an AI solution, architecture and build path.</p><a href="/ai-assessment" className="mt-9 inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 font-semibold text-white shadow-xl shadow-slate-900/10 transition hover:-translate-y-0.5 hover:bg-blue-600">Create my AI blueprint <ArrowRight size={18} /></a></div></section>
